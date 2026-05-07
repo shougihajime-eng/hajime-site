@@ -205,7 +205,7 @@ export default function Home() {
               現在は将棋講師として、横浜（南区吉野町・青葉区）と東京（両国）で将棋教室を運営。子どもから大人まで、初心者から上級者まで、それぞれの目標に合わせた指導を行っています。
             </p>
             <p>
-              またYouTubeチャンネルでの動画発信、書籍の執筆・監修、漫画『リボーンの棋士』の監修など、将棋の楽しさを広く伝える活動にも取り組んでいます。
+              また、中村太地八段との共同YouTubeチャンネル「棋士中村太地将棋はじめch」での動画発信や、書籍の執筆・監修、漫画『リボーンの棋士』の監修など、将棋の楽しさを広く伝える活動にも取り組んでいます。
             </p>
             <p className="pt-2 text-sumi">
               「将棋って、楽しい。」
@@ -318,7 +318,7 @@ export default function Home() {
               </span>
             </a>
             <a
-              href="https://www.youtube.com/results?search_query=%E3%81%AF%E3%81%98%E3%82%81%E5%85%88%E7%94%9F+%E5%B0%86%E6%A3%8B"
+              href="https://www.youtube.com/channel/UCC0Q1NBgGJRzFFPe1IPYtwg"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center justify-between rounded-sm border border-rule bg-white/70 p-5 transition hover:border-sumi"
@@ -326,7 +326,10 @@ export default function Home() {
               <div>
                 <p className="text-xs tracking-wider text-sumi/50">YouTube</p>
                 <p className="font-serif-jp text-base text-sumi">
-                  はじめ先生の将棋チャンネル
+                  棋士中村太地将棋はじめch
+                </p>
+                <p className="mt-1 text-xs text-sumi/60">
+                  中村太地八段との共同チャンネル。楽しく将棋をお届け中。
                 </p>
               </div>
               <span className="text-shu group-hover:translate-x-1 transition" aria-hidden>
