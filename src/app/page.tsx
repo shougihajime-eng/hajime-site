@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 function Koma({
@@ -151,9 +152,20 @@ export default function Home() {
       {/* ===== Hero ===== */}
       <section className="relative overflow-hidden border-b border-rule">
         <div className="mx-auto flex w-full max-w-5xl flex-col items-center px-6 py-20 sm:py-28">
-          {/* 駒 */}
-          <div className="relative mb-8 w-32 sm:w-40">
-            <Koma label="王" className="w-full drop-shadow-md" />
+          {/* 顔写真 */}
+          <div className="relative mb-8 h-48 w-48 sm:h-56 sm:w-56">
+            <div className="absolute inset-0 rounded-full ring-4 ring-shu/30 ring-offset-4 ring-offset-washi" />
+            <Image
+              src="/hajime-portrait.png"
+              alt="鈴木 肇"
+              fill
+              priority
+              sizes="(min-width: 640px) 14rem, 12rem"
+              className="rounded-full object-cover object-top"
+            />
+            <div className="absolute -bottom-2 -right-2 w-12 sm:w-14">
+              <Koma label="王" className="w-full drop-shadow-md" />
+            </div>
           </div>
 
           {/* 名前 */}
