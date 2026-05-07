@@ -110,16 +110,16 @@ const services = [
   {
     name: "青葉はじめ将棋教室",
     place: "横浜市青葉区",
-    desc: "横浜市青葉区にて開催している将棋教室。詳細はお問い合わせください。",
-    href: "",
-    cta: "（準備中）",
+    desc: "横浜市青葉区にて開催している将棋教室。詳細は公式サイトをご覧ください。",
+    href: "http://www.aobashogiclub.net/",
+    cta: "教室の公式サイトへ",
   },
   {
     name: "両国将棋塾",
     place: "東京都墨田区 両国将棋囲碁センター内",
     desc: "プロ棋士・及川拓馬七段との共同講師。本格派の門下も受け入れ。",
-    href: "",
-    cta: "（準備中）",
+    href: "https://ryogokushogiigo.ikidane.com/",
+    cta: "公式サイトへ",
   },
   {
     name: "将棋はじめあい",
