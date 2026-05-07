@@ -78,6 +78,13 @@ const achievements = [
     highlight: true,
   },
   {
+    year: "2022年",
+    title: "第35回 アマチュア竜王戦 全国大会",
+    result: "ベスト4",
+    note: "竜王戦6組出場権獲得",
+    highlight: false,
+  },
+  {
     year: "2016年",
     title: "第70回 全日本アマチュア名人戦",
     result: "ベスト4",
@@ -132,6 +139,11 @@ const services = [
 ];
 
 const books = [
+  {
+    title: "振り飛車を一刀両断！右四間飛車エルモ囲い",
+    year: "2020年",
+    role: "著",
+  },
   { title: "進化を続ける！右四間飛車エルモ囲い", year: "2022年", role: "著" },
   {
     title: "反撃する現代四間飛車〜はじめ先生と学ぶ新研究〜",
@@ -222,7 +234,11 @@ export default function Home() {
             <p className="pt-2 text-sumi">
               「将棋って、楽しい。」
               <br />
-              その一手の重みと面白さを、一人でも多くの方に届けることが、私の願いです。
+              自分が世界一、将棋を楽しむこと。
+              <br />
+              そして、その楽しさを一人でも多くの方に届けること。
+              <br />
+              それが私の願いです。
             </p>
           </div>
         </div>
