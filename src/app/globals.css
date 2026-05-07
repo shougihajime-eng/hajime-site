@@ -1,26 +1,51 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* 和風カラーパレット */
+  --color-washi: #faf6ee;       /* 生成り（和紙） */
+  --color-sumi: #1a1a1a;        /* 墨色 */
+  --color-shu: #c1272d;         /* 朱色（鳥居の赤） */
+  --color-shu-deep: #8b1d1f;    /* 深い朱（hover用） */
+  --color-kiji: #d6a972;        /* 木地色（駒の色） */
+  --color-kiji-dark: #a17a4a;   /* 駒の文字側 */
+  --color-asagi: #2a4a5a;       /* 浅葱色（差し色） */
+  --color-rule: #d8cfb8;        /* 罫線の薄茶 */
+
+  --font-serif-jp: var(--font-serif-jp), "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-sans-jp: var(--font-sans-jp), "Hiragino Sans", "Yu Gothic", sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-washi);
+  color: var(--color-sumi);
+}
+
+/* 和紙の薄い格子模様（背景アクセント） */
+.bg-washi-grid {
+  background-color: var(--color-washi);
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 39px,
+      rgba(26, 26, 26, 0.03) 39px,
+      rgba(26, 26, 26, 0.03) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 39px,
+      rgba(26, 26, 26, 0.03) 39px,
+      rgba(26, 26, 26, 0.03) 40px
+    );
+}
+
+/* 縦書き見出し用 */
+.tategaki {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
 }
