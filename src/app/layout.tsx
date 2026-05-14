@@ -39,7 +39,7 @@ export default function RootLayout({
       lang="ja"
       className={`${notoSerifJP.variable} ${notoSansJP.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-washi text-sumi font-sans-jp">
+      <body className="min-h-full flex flex-col bg-yoru text-kinari font-sans-jp">
         {children}
       </body>
     </html>

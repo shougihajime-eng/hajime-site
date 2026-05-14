@@ -1,15 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  /* 和風カラーパレット */
-  --color-washi: #faf6ee;       /* 生成り（和紙） */
-  --color-sumi: #1a1a1a;        /* 墨色 */
-  --color-shu: #c1272d;         /* 朱色（鳥居の赤） */
-  --color-shu-deep: #8b1d1f;    /* 深い朱（hover用） */
-  --color-kiji: #d6a972;        /* 木地色（駒の色） */
-  --color-kiji-dark: #a17a4a;   /* 駒の文字側 */
-  --color-asagi: #2a4a5a;       /* 浅葱色（差し色） */
-  --color-rule: #d8cfb8;        /* 罫線の薄茶 */
+  /* 黒×金×朱 — 動く将棋盤テーマ */
+  --color-sumi: #0a0a0a;            /* 漆黒 */
+  --color-yoru: #14110d;            /* 夜墨（背景） */
+  --color-yoru-deep: #0d0b08;       /* さらに深い夜墨 */
+  --color-kin: #d4af37;             /* 金（メインアクセント） */
+  --color-kin-bright: #f5d77a;      /* 明るい金（ハイライト） */
+  --color-kin-deep: #8b6914;        /* 深い金（罫線） */
+  --color-shu: #c1272d;             /* 朱（差し色） */
+  --color-shu-bright: #e8424a;      /* 明るい朱 */
+  --color-kiji: #d6a972;            /* 駒の木地色 */
+  --color-kiji-dark: #a17a4a;       /* 駒の影 */
+  --color-kinari: #f0e8d4;          /* 生成り（本文白） */
+  --color-rule: #2a241c;            /* 暗い罫線 */
+  --color-rule-soft: #3a3328;       /* 少し見える罫線 */
 
   --font-serif-jp: var(--font-serif-jp), "Hiragino Mincho ProN", "Yu Mincho", serif;
   --font-sans-jp: var(--font-sans-jp), "Hiragino Sans", "Yu Gothic", sans-serif;
@@ -20,32 +25,194 @@ html {
 }
 
 body {
-  background-color: var(--color-washi);
-  color: var(--color-sumi);
+  background-color: var(--color-yoru);
+  color: var(--color-kinari);
 }
 
-/* 和紙の薄い格子模様（背景アクセント） */
-.bg-washi-grid {
-  background-color: var(--color-washi);
+/* ============================================
+   背景: 9x9 将棋盤の淡いライン
+   ============================================ */
+.bg-ban {
+  background-color: var(--color-yoru);
   background-image:
     repeating-linear-gradient(
       0deg,
       transparent 0,
-      transparent 39px,
-      rgba(26, 26, 26, 0.03) 39px,
-      rgba(26, 26, 26, 0.03) 40px
+      transparent 71px,
+      rgba(212, 175, 55, 0.04) 71px,
+      rgba(212, 175, 55, 0.04) 72px
     ),
     repeating-linear-gradient(
       90deg,
       transparent 0,
-      transparent 39px,
-      rgba(26, 26, 26, 0.03) 39px,
-      rgba(26, 26, 26, 0.03) 40px
+      transparent 71px,
+      rgba(212, 175, 55, 0.04) 71px,
+      rgba(212, 175, 55, 0.04) 72px
+    ),
+    radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      rgba(212, 175, 55, 0.08),
+      transparent 70%
     );
 }
 
-/* 縦書き見出し用 */
+/* ============================================
+   金色グラデーション文字
+   ============================================ */
+.text-kin-grad {
+  background: linear-gradient(
+    180deg,
+    #f5d77a 0%,
+    #d4af37 45%,
+    #b08a25 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ============================================
+   金縁グロー（カード・ボタン用）
+   ============================================ */
+.glow-kin {
+  box-shadow:
+    0 0 0 1px rgba(212, 175, 55, 0.4),
+    0 0 24px -8px rgba(212, 175, 55, 0.35),
+    inset 0 0 32px -16px rgba(212, 175, 55, 0.15);
+}
+
+.glow-kin-strong {
+  box-shadow:
+    0 0 0 2px rgba(212, 175, 55, 0.6),
+    0 0 36px -6px rgba(212, 175, 55, 0.5),
+    inset 0 0 40px -16px rgba(212, 175, 55, 0.25);
+}
+
+/* ============================================
+   背景に浮遊する駒
+   ============================================ */
+@keyframes float-koma-1 {
+  0%, 100% { transform: translate(0, 0) rotate(-8deg); }
+  50% { transform: translate(20px, -30px) rotate(-12deg); }
+}
+@keyframes float-koma-2 {
+  0%, 100% { transform: translate(0, 0) rotate(12deg); }
+  50% { transform: translate(-25px, 25px) rotate(8deg); }
+}
+@keyframes float-koma-3 {
+  0%, 100% { transform: translate(0, 0) rotate(-20deg); }
+  50% { transform: translate(15px, 35px) rotate(-25deg); }
+}
+@keyframes float-koma-4 {
+  0%, 100% { transform: translate(0, 0) rotate(30deg); }
+  50% { transform: translate(-15px, -20px) rotate(35deg); }
+}
+
+.koma-float-1 { animation: float-koma-1 12s ease-in-out infinite; }
+.koma-float-2 { animation: float-koma-2 14s ease-in-out infinite; }
+.koma-float-3 { animation: float-koma-3 16s ease-in-out infinite; }
+.koma-float-4 { animation: float-koma-4 18s ease-in-out infinite; }
+
+/* ============================================
+   ヒーロー駒（王）のゆっくり回転
+   ============================================ */
+@keyframes pulse-kin {
+  0%, 100% {
+    box-shadow:
+      0 0 0 4px rgba(212, 175, 55, 0.3),
+      0 0 60px 0 rgba(212, 175, 55, 0.4),
+      0 0 120px 0 rgba(212, 175, 55, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 0 0 4px rgba(212, 175, 55, 0.5),
+      0 0 80px 0 rgba(212, 175, 55, 0.6),
+      0 0 160px 0 rgba(212, 175, 55, 0.3);
+  }
+}
+.pulse-kin { animation: pulse-kin 4s ease-in-out infinite; }
+
+@keyframes hover-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.hover-bob { animation: hover-bob 5s ease-in-out infinite; }
+
+/* ============================================
+   スクロール時の出現演出
+   （対応ブラウザのみ。非対応は最初から表示）
+   ============================================ */
+.reveal {
+  opacity: 1;
+}
+
+@supports (animation-timeline: view()) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: reveal-in linear forwards;
+    animation-timeline: view();
+    animation-range: entry 0% cover 28%;
+  }
+  .reveal-rotate {
+    opacity: 0;
+    transform: translateY(40px) rotate(-6deg);
+    animation: reveal-rotate-in linear forwards;
+    animation-timeline: view();
+    animation-range: entry 0% cover 32%;
+  }
+}
+
+@keyframes reveal-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes reveal-rotate-in {
+  to { opacity: 1; transform: translateY(0) rotate(0); }
+}
+
+/* ============================================
+   駒型クリップパス（五角形）
+   ============================================ */
+.clip-koma {
+  clip-path: polygon(50% 0%, 88% 13%, 100% 100%, 0% 100%, 12% 13%);
+}
+
+/* ============================================
+   縦書き
+   ============================================ */
 .tategaki {
   writing-mode: vertical-rl;
   text-orientation: upright;
+}
+.tategaki-mixed {
+  writing-mode: vertical-rl;
+}
+
+/* ============================================
+   キャッチコピー手描き風アンダーライン
+   ============================================ */
+.brush-underline {
+  background-image: linear-gradient(
+    180deg,
+    transparent 65%,
+    rgba(193, 39, 45, 0.5) 65%,
+    rgba(193, 39, 45, 0.5) 88%,
+    transparent 88%
+  );
+}
+
+/* ============================================
+   モーション低減を尊重
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .koma-float-1, .koma-float-2, .koma-float-3, .koma-float-4,
+  .pulse-kin, .hover-bob {
+    animation: none !important;
+  }
+  .reveal, .reveal-rotate {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
 }
