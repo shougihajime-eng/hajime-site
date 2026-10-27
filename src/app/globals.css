@@ -1,70 +1,107 @@
 @import "tailwindcss";
 
 @theme {
-  /* 黒×金×朱 — 動く将棋盤テーマ */
-  --color-sumi: #0a0a0a;            /* 漆黒 */
-  --color-yoru: #14110d;            /* 夜墨（背景） */
-  --color-yoru-deep: #0d0b08;       /* さらに深い夜墨 */
-  --color-kin: #d4af37;             /* 金（メインアクセント） */
-  --color-kin-bright: #f5d77a;      /* 明るい金（ハイライト） */
-  --color-kin-deep: #8b6914;        /* 深い金（罫線） */
-  --color-shu: #c1272d;             /* 朱（差し色） */
-  --color-shu-bright: #e8424a;      /* 明るい朱 */
-  --color-kiji: #d6a972;            /* 駒の木地色 */
-  --color-kiji-dark: #a17a4a;       /* 駒の影 */
-  --color-kinari: #f0e8d4;          /* 生成り（本文白） */
-  --color-rule: #2a241c;            /* 暗い罫線 */
-  --color-rule-soft: #3a3328;       /* 少し見える罫線 */
+  /* ============================================
+     朝焼けの和紙 — はじめアプリ共通デザインシステム（Fable5・2026-07）
+     旧トークン名（yoru/kin/shu/kinari…）は保持し、中身だけ新色に差し替え
+     ============================================ */
+  --color-sumi: #463527;            /* 焙じ茶の墨（足元・footer） */
+  --color-yoru: #fbeddc;            /* 朝焼けの和紙＝地色（旧: 夜墨） */
+  --color-yoru-deep: #f5dec2;       /* 一段濃い和紙（帯） */
+  --color-kin: #9c6e2e;             /* 深い金（読める金＝榧の濃色） */
+  --color-kin-bright: #dd9c2b;      /* 山吹＝ごほうびの金 */
+  --color-kin-deep: #7a5622;        /* さらに深い金（罫線） */
+  --color-shu: #e8603c;             /* 柿＝主アクセント（行動） */
+  --color-shu-bright: #f07b58;      /* 明るい柿 */
+  --color-shu-deep: #c7492b;        /* 深い柿 */
+  --color-kiji: #e2b377;            /* 榧＝盤の木 */
+  --color-kiji-dark: #9c6e2e;       /* 榧の濃色 */
+  --color-kinari: #463527;          /* 本文（旧: 生成り→今は焙じ茶の墨） */
+  --color-rule: #ead9bf;            /* 淡い罫線 */
+  --color-rule-soft: #e3cca9;       /* 少し見える罫線 */
+
+  /* 新デザインシステムの追加トークン */
+  --color-ruri: #3d5a96;            /* 瑠璃＝見出し・案内 */
+  --color-ruri-l: #6383bc;
+  --color-wakaba: #43965f;          /* 若葉＝すすむ */
+  --color-ink2: #947b62;            /* うすい墨＝説明文 */
+  --color-card: #fffdf6;            /* 白カード */
+  --color-koma-men: #f6e8c6;        /* 駒のクリーム */
 
   --font-serif-jp: var(--font-serif-jp), "Hiragino Mincho ProN", "Yu Mincho", serif;
   --font-sans-jp: var(--font-sans-jp), "Hiragino Sans", "Yu Gothic", sans-serif;
+  --font-koma: var(--font-koma), "Hiragino Mincho ProN", "Yu Mincho", serif;
+}
+
+:root {
+  --sh: 0 10px 28px rgba(150, 90, 40, 0.14);
+  --sh-l: 0 18px 46px rgba(150, 90, 40, 0.22);
+  --radius: 24px;
 }
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   background-color: var(--color-yoru);
   color: var(--color-kinari);
+  overflow-x: hidden;
+  max-width: 100%;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+/* キーボード操作の見える印を残す */
+:focus-visible {
+  outline: 3px solid var(--color-ruri);
+  outline-offset: 3px;
+  border-radius: 6px;
 }
 
 /* ============================================
-   背景: 9x9 将棋盤の淡いライン
+   背景: 朝焼けの和紙（肇＝はじまり＝日の出の光）
    ============================================ */
 .bg-ban {
   background-color: var(--color-yoru);
   background-image:
+    radial-gradient(
+      ellipse 90% 55% at 50% -5%,
+      rgba(232, 96, 60, 0.14),
+      rgba(221, 156, 43, 0.08) 45%,
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 70% 40% at 85% 100%,
+      rgba(226, 179, 119, 0.18),
+      transparent 70%
+    ),
     repeating-linear-gradient(
       0deg,
       transparent 0,
       transparent 71px,
-      rgba(212, 175, 55, 0.04) 71px,
-      rgba(212, 175, 55, 0.04) 72px
+      rgba(156, 110, 46, 0.045) 71px,
+      rgba(156, 110, 46, 0.045) 72px
     ),
     repeating-linear-gradient(
       90deg,
       transparent 0,
       transparent 71px,
-      rgba(212, 175, 55, 0.04) 71px,
-      rgba(212, 175, 55, 0.04) 72px
-    ),
-    radial-gradient(
-      ellipse 80% 60% at 50% 0%,
-      rgba(212, 175, 55, 0.08),
-      transparent 70%
+      rgba(156, 110, 46, 0.045) 71px,
+      rgba(156, 110, 46, 0.045) 72px
     );
 }
 
 /* ============================================
-   金色グラデーション文字
+   金色グラデーション文字（明るい和紙の上でも読める深い金）
    ============================================ */
 .text-kin-grad {
   background: linear-gradient(
     180deg,
-    #f5d77a 0%,
-    #d4af37 45%,
-    #b08a25 100%
+    #c78a1f 0%,
+    #9c6e2e 55%,
+    #7a5622 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -73,24 +110,20 @@ body {
 }
 
 /* ============================================
-   金縁グロー（カード・ボタン用）
+   やわらかい影（旧: 金縁グロー → 白カードの浮遊感）
    ============================================ */
 .glow-kin {
-  box-shadow:
-    0 0 0 1px rgba(212, 175, 55, 0.4),
-    0 0 24px -8px rgba(212, 175, 55, 0.35),
-    inset 0 0 32px -16px rgba(212, 175, 55, 0.15);
+  box-shadow: var(--sh);
 }
 
 .glow-kin-strong {
   box-shadow:
-    0 0 0 2px rgba(212, 175, 55, 0.6),
-    0 0 36px -6px rgba(212, 175, 55, 0.5),
-    inset 0 0 40px -16px rgba(212, 175, 55, 0.25);
+    0 0 0 1px rgba(221, 156, 43, 0.35),
+    var(--sh-l);
 }
 
 /* ============================================
-   背景に浮遊する駒
+   背景に浮遊する駒（うっすら・和紙になじむ）
    ============================================ */
 @keyframes float-koma-1 {
   0%, 100% { transform: translate(0, 0) rotate(-8deg); }
@@ -115,23 +148,23 @@ body {
 .koma-float-4 { animation: float-koma-4 18s ease-in-out infinite; }
 
 /* ============================================
-   ヒーロー駒（王）のゆっくり回転
+   顔写真まわり: 朝日のやわらかい光の輪
    ============================================ */
 @keyframes pulse-kin {
   0%, 100% {
     box-shadow:
-      0 0 0 4px rgba(212, 175, 55, 0.3),
-      0 0 60px 0 rgba(212, 175, 55, 0.4),
-      0 0 120px 0 rgba(212, 175, 55, 0.2);
+      0 0 0 6px rgba(221, 156, 43, 0.22),
+      0 0 50px 0 rgba(232, 96, 60, 0.28),
+      0 14px 40px -8px rgba(150, 90, 40, 0.30);
   }
   50% {
     box-shadow:
-      0 0 0 4px rgba(212, 175, 55, 0.5),
-      0 0 80px 0 rgba(212, 175, 55, 0.6),
-      0 0 160px 0 rgba(212, 175, 55, 0.3);
+      0 0 0 10px rgba(221, 156, 43, 0.30),
+      0 0 70px 0 rgba(232, 96, 60, 0.38),
+      0 14px 40px -8px rgba(150, 90, 40, 0.30);
   }
 }
-.pulse-kin { animation: pulse-kin 4s ease-in-out infinite; }
+.pulse-kin { animation: pulse-kin 4s ease-in-out infinite; border-radius: 9999px; }
 
 @keyframes hover-bob {
   0%, 100% { transform: translateY(0); }
@@ -179,6 +212,24 @@ body {
 }
 
 /* ============================================
+   朱の落款（はんこ）— signature
+   ============================================ */
+.rakkan {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #f07b58, #c7492b);
+  color: #fff7ec;
+  border-radius: 10px;
+  transform: rotate(6deg);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 247, 236, 0.55),
+    0 6px 16px -4px rgba(199, 73, 43, 0.5);
+  font-family: var(--font-serif-jp);
+  font-weight: 700;
+}
+
+/* ============================================
    縦書き
    ============================================ */
 .tategaki {
@@ -190,14 +241,14 @@ body {
 }
 
 /* ============================================
-   キャッチコピー手描き風アンダーライン
+   キャッチコピー手描き風アンダーライン（山吹のマーカー）
    ============================================ */
 .brush-underline {
   background-image: linear-gradient(
     180deg,
     transparent 65%,
-    rgba(193, 39, 45, 0.5) 65%,
-    rgba(193, 39, 45, 0.5) 88%,
+    rgba(221, 156, 43, 0.45) 65%,
+    rgba(221, 156, 43, 0.45) 88%,
     transparent 88%
   );
 }
@@ -215,4 +266,93 @@ body {
     transform: none !important;
     animation: none !important;
   }
+  html { scroll-behavior: auto; }
 }
+
+/* ⚡ タップを世界一クラスに（あと付け・2026-06-23 本人「全アプリに入れて」）
+   長押しメニュー抑止＋押した瞬間に反応＋押した手ごたえ。入力欄の貼り付け/選択は温存。
+   :activeは geometry不変の filter(明るさ) ＝盤の駒等が崩れない。本体の見た目/操作は壊さない。 */
+* { -webkit-touch-callout: none; }
+input, textarea { -webkit-touch-callout: default; -webkit-user-select: text; user-select: text; }
+button, a, [role="button"], summary, label, select { touch-action: manipulation; }
+select { -webkit-appearance: none; appearance: none; background-color: var(--color-card); }
+@media (hover: none) {
+  button:active, [role="button"]:active { filter: brightness(0.9); transition: filter .05s ease; }
+}
+
+/* ============================================
+   「はじめての将棋」紹介ページ専用の色（アプリの画面の色に合わせる・2026-10-27）
+   紺 #121d39 ／ 珊瑚 #ed6749 ／ クリーム #fff6ee ／ 桃 #ffe9dd
+   ============================================ */
+@theme {
+  --color-hs-navy: #121d39;
+  --color-hs-navy-l: #22305a;
+  --color-hs-coral: #ed6749;
+  --color-hs-coral-deep: #d4502f;
+  --color-hs-cream: #fff6ee;
+  --color-hs-peach: #ffe9dd;
+  --color-hs-ink: #1f2538;
+  --color-hs-ink2: #5b6074;
+  --color-hs-line: #f0dccb;
+}
+.hs-bg {
+  background-color: var(--color-hs-cream);
+  background-image:
+    radial-gradient(ellipse 90% 50% at 50% -5%, rgba(237, 103, 73, 0.16), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(255, 194, 77, 0.18), transparent 70%);
+}
+.hs-phone {
+  border-radius: 2.2rem;
+  box-shadow:
+    0 0 0 6px #121d39,
+    0 0 0 8px #3a4566,
+    0 24px 50px -16px rgba(18, 29, 57, 0.45);
+  overflow: hidden;
+  background: #121d39;
+}
+
+/* Kifu Vault 用＝深い緑と金（AppIntro の hs-* の変数をここで上書き） */
+.kv-theme {
+  --color-hs-navy: #1b2a1e;
+  --color-hs-navy-l: #2c4030;
+  --color-hs-coral: #a0792a;
+  --color-hs-coral-deep: #7a5a17;
+  --color-hs-cream: #f7f3e8;
+  --color-hs-peach: #f1e6c8;
+  --color-hs-ink: #1f2a22;
+  --color-hs-ink2: #5b6a5e;
+  --color-hs-line: #e4dcc6;
+  --hs-frame: #1a2117;
+  --hs-frame-l: #3b4a3d;
+}
+.kv-theme.hs-bg {
+  background-image:
+    radial-gradient(ellipse 90% 50% at 50% -5%, rgba(160, 121, 42, 0.18), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(27, 42, 30, 0.12), transparent 70%);
+}
+.hs-phone {
+  box-shadow:
+    0 0 0 6px var(--hs-frame, #121d39),
+    0 0 0 8px var(--hs-frame-l, #3a4566),
+    0 24px 50px -16px rgba(0, 0, 0, 0.35);
+  background: var(--hs-frame, #121d39);
+}
+
+/* ============================================
+   遊び心（控えめ・読みやすさ優先・動きが苦手な設定では止める）
+   ============================================ */
+@keyframes koma-hop {
+  0%, 70%, 100% { transform: translateY(0) rotate(0); }
+  80% { transform: translateY(-6px) rotate(-4deg); }
+  90% { transform: translateY(0) rotate(3deg); }
+}
+.koma-hop { display: inline-block; animation: koma-hop 3.2s ease-in-out infinite; }
+.spin-on-hover { transition: transform .6s cubic-bezier(.34,1.56,.64,1); }
+.spin-on-hover:hover, .spin-on-hover:active { transform: rotate(360deg); }
+@media (prefers-reduced-motion: reduce) {
+  .koma-hop { animation: none !important; }
+  .spin-on-hover, .spin-on-hover:hover, .spin-on-hover:active { transition: none !important; transform: none !important; }
+}
+
+/* 紹介ページは日本語の普通の折り返し（body の keep-all だと行の頭に「、」「。」だけが残るため） */
+.hs-bg { word-break: normal; overflow-wrap: anywhere; line-break: strict; }

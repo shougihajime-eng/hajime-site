@@ -1,18 +1,29 @@
 import type { Metadata } from "next";
-import { Noto_Serif_JP, Noto_Sans_JP } from "next/font/google";
+import {
+  Kaisei_Decol,
+  Zen_Maru_Gothic,
+  Shippori_Mincho_B1,
+} from "next/font/google";
 import "./globals.css";
 
-const notoSerifJP = Noto_Serif_JP({
+const kaiseiDecol = Kaisei_Decol({
   variable: "--font-serif-jp",
   subsets: ["latin"],
-  weight: ["400", "600", "700", "900"],
+  weight: ["400", "500", "700"],
   display: "swap",
 });
 
-const notoSansJP = Noto_Sans_JP({
+const zenMaruGothic = Zen_Maru_Gothic({
   variable: "--font-sans-jp",
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "700", "900"],
+  display: "swap",
+});
+
+const shipporiMincho = Shippori_Mincho_B1({
+  variable: "--font-koma",
+  subsets: ["latin"],
+  weight: ["700", "800"],
   display: "swap",
 });
 
@@ -37,7 +48,7 @@ export default function RootLayout({
   return (
     <html
       lang="ja"
-      className={`${notoSerifJP.variable} ${notoSansJP.variable} h-full antialiased`}
+      className={`${kaiseiDecol.variable} ${zenMaruGothic.variable} ${shipporiMincho.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-yoru text-kinari font-sans-jp">
         {children}
