@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { AppCopy, Shot } from "./appIntroTypes";
+import LiteYouTube from "./LiteYouTube";
 
 /* ============================================
    アプリ紹介ページの本体（はじめての将棋＝日本語・英語／Kifu Vault で共通）
@@ -70,25 +71,26 @@ function StoreButtons({
           </a>
         </div>
       ) : (
-        <div className="flex flex-col gap-3 sm:flex-row" aria-live="polite">
-          <span
-            aria-disabled="true"
-            className={`${btnBase} cursor-not-allowed border-[3px] border-dashed border-hs-navy/40 bg-white/70 text-hs-navy/70`}
-          >
-            {s.comingSoon.appStore}
-          </span>
-          <span
-            aria-disabled="true"
-            className={`${btnBase} cursor-not-allowed border-[3px] border-dashed border-hs-navy/40 bg-white/70 text-hs-navy/70`}
-          >
-            {s.comingSoon.googlePlay}
-          </span>
+        <div className="flex flex-col gap-3" aria-live="polite">
+          {s.comingSoon.followHref && (
+            <a
+              href={s.comingSoon.followHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${btnBase} bg-hs-coral text-white shadow-[0_12px_28px_rgba(0,0,0,0.18)] transition hover:bg-hs-coral-deep`}
+            >
+              {s.comingSoon.followLabel}
+            </a>
+          )}
+          <p className="text-center font-sans-jp text-lg font-black text-hs-navy">
+            {s.comingSoon.appStore} ・ {s.comingSoon.googlePlay}
+          </p>
         </div>
       )}
-      <p className="text-center font-sans-jp text-base font-bold text-hs-ink sm:text-lg">
+      <p className="text-center font-sans-jp text-lg font-black text-hs-ink sm:text-xl">
         {s.priceLine}
       </p>
-      <p className="text-center font-sans-jp text-sm leading-relaxed text-hs-ink2 sm:text-base">
+      <p className="text-center font-sans-jp text-lg font-bold leading-relaxed text-hs-ink2">
         {s.platformLine}
       </p>
       {released
@@ -98,7 +100,7 @@ function StoreButtons({
             </p>
           )
         : s.comingSoon.note && (
-            <p className="text-center font-sans-jp text-sm font-bold leading-relaxed text-hs-coral-deep sm:text-base">
+            <p className="text-center font-sans-jp text-lg font-bold leading-relaxed text-hs-coral-deep">
               {s.comingSoon.note}
             </p>
           )}
@@ -170,7 +172,7 @@ export default function AppIntro({
   released: boolean;
   themeClass?: string;
 }) {
-  const { hero, voice, worries, steps, features, author, modes, price } = copy;
+  const { hero, voice, video, reviews, worries, steps, features, author, modes, price } = copy;
   return (
     <main lang={copy.lang} className={`hs-bg flex flex-col text-hs-ink ${themeClass}`}>
       {/* ===== 上のバー：戻る＋言語 ===== */}
@@ -187,7 +189,7 @@ export default function AppIntro({
       </header>
 
       {/* ===== ① 何のアプリか・誰のためか＋買うボタン ===== */}
-      <section className="relative mx-auto w-full max-w-6xl px-5 pt-10 pb-16 sm:px-8 sm:pt-16 sm:pb-24">
+      <section className="relative mx-auto w-full max-w-6xl px-5 pt-8 pb-12 sm:px-8 sm:pt-12 sm:pb-16">
         <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
           <div className="flex flex-col items-start">
             <p className="font-sans-jp text-base font-bold tracking-wider text-hs-coral-deep sm:text-lg">
@@ -221,6 +223,9 @@ export default function AppIntro({
             <p className="mt-6 font-sans-jp text-xl font-black leading-relaxed text-hs-ink sm:text-2xl">
               {hero.lead}
             </p>
+            <div className="mx-auto mt-7 w-[62%] max-w-[260px] lg:hidden">
+              <PhoneShot shot={hero.shot} eager sizes="62vw" />
+            </div>
             <p className="mt-3 font-sans-jp text-lg leading-relaxed text-hs-ink2 sm:text-xl">
               {hero.forWhom}
             </p>
@@ -234,14 +239,14 @@ export default function AppIntro({
             </div>
           </div>
 
-          <div className="mx-auto w-[68%] max-w-[300px] lg:w-full lg:max-w-[340px]">
-            <PhoneShot shot={hero.shot} eager sizes="(min-width: 1024px) 340px, 68vw" />
+          <div className="mx-auto hidden w-full max-w-[340px] lg:block">
+            <PhoneShot shot={hero.shot} sizes="340px" />
           </div>
         </div>
       </section>
 
       {/* ===== ② はじめ先生の顔と思い ===== */}
-      <section className="bg-hs-navy py-16 text-white sm:py-24">
+      <section className="bg-hs-navy py-12 text-white sm:py-16">
         <div className="mx-auto grid w-full max-w-5xl items-center gap-8 px-5 sm:px-8 md:grid-cols-[auto_1fr] md:gap-12">
           <div className="mx-auto h-40 w-40 shrink-0 overflow-hidden rounded-full ring-4 ring-hs-coral sm:h-52 sm:w-52">
             <Image
@@ -272,8 +277,47 @@ export default function AppIntro({
         </div>
       </section>
 
+      {/* ===== ②' 買った人の声（App Store のレビューの原文） ===== */}
+      {reviews && (
+        <section className="mx-auto w-full max-w-5xl px-5 py-12 sm:px-8 sm:py-16">
+          <Kicker>{reviews.kicker}</Kicker>
+          <H2 text={reviews.title} />
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
+            {reviews.items.map((r) => (
+              <figure
+                key={r.by}
+                className="flex flex-col rounded-3xl border border-hs-line bg-white p-6 shadow-[0_12px_30px_rgba(0,0,0,0.07)] sm:p-7"
+              >
+                <p aria-label={`★${r.stars}`} className="font-sans-jp text-2xl tracking-widest text-hs-coral">
+                  {"★".repeat(r.stars)}
+                </p>
+                <p className="mt-2 font-serif-jp text-2xl font-black leading-snug text-hs-navy">{r.title}</p>
+                <blockquote className="mt-3 flex-1 font-sans-jp text-lg leading-relaxed text-hs-ink">
+                  {r.text}
+                </blockquote>
+                <figcaption className="mt-4 font-sans-jp text-base font-bold text-hs-ink2">{r.by}</figcaption>
+              </figure>
+            ))}
+          </div>
+          <p className="mt-5 font-sans-jp text-base leading-relaxed text-hs-ink2">{reviews.note}</p>
+        </section>
+      )}
+
+      {/* ===== ②'' 使っている様子（動画） ===== */}
+      {video && (
+        <section className="mx-auto w-full max-w-4xl px-5 py-12 sm:px-8 sm:py-16">
+          <Kicker>{video.kicker}</Kicker>
+          <H2 text={video.title} />
+          <div className="mt-8 overflow-hidden rounded-3xl shadow-[0_16px_40px_rgba(0,0,0,0.15)]">
+            <LiteYouTube videoId={video.videoId} title={video.caption} />
+          </div>
+          <p className="mt-4 font-sans-jp text-lg font-bold leading-relaxed text-hs-ink2">{video.caption}</p>
+        </section>
+      )}
+
       {/* ===== ③ 悩み → 答え ===== */}
-      <section className="mx-auto w-full max-w-5xl px-5 py-16 sm:px-8 sm:py-24">
+      {worries && (
+      <section className="mx-auto w-full max-w-5xl px-5 py-12 sm:px-8 sm:py-16">
         <Kicker>{worries.kicker}</Kicker>
         <H2 text={worries.title} />
         <div className="mt-10 grid gap-5 md:grid-cols-3">
@@ -295,14 +339,15 @@ export default function AppIntro({
           ))}
         </div>
       </section>
+      )}
 
       {/* ===== ④ どう進むか（3段階＋写真） ===== */}
-      <section className="bg-white/70 py-16 sm:py-24">
+      <section className="bg-white/70 py-12 sm:py-16">
         <div className="mx-auto w-full max-w-5xl px-5 sm:px-8">
           <Kicker>{steps.kicker}</Kicker>
           <H2 text={steps.title} />
 
-          <ol className="mt-12 space-y-14 sm:space-y-20">
+          <ol className="mt-10 space-y-10 sm:space-y-14">
             {steps.items.map((st, i) => (
               <li
                 key={st.no}
@@ -344,11 +389,19 @@ export default function AppIntro({
             ))}
           </ol>
 
+          <div className="mt-12 flex flex-col items-center gap-5 text-center">
+            {copy.store.midCall && (
+              <p className="font-serif-jp text-2xl font-black leading-snug text-hs-navy sm:text-3xl">
+                {copy.store.midCall}
+              </p>
+            )}
+            <StoreButtons copy={copy} released={released} />
+          </div>
         </div>
       </section>
 
       {/* ===== ④' できること（写真と組にして、たっぷり） ===== */}
-      <section className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+      <section className="mx-auto w-full max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
         <Kicker>{features.kicker}</Kicker>
         <H2 text={features.title} />
         <p className="mt-5 max-w-3xl font-sans-jp text-lg leading-relaxed text-hs-ink2 sm:text-xl">
@@ -358,13 +411,13 @@ export default function AppIntro({
           {features.items.map((f, i) => (
             <li
               key={f.title}
-              className={`flex gap-4 rounded-3xl border border-hs-line bg-white p-5 shadow-[0_12px_30px_rgba(0,0,0,0.07)] ${
-                f.chips ? "sm:col-span-2 lg:col-span-3 sm:gap-8" : ""
+              className={`flex rounded-3xl border border-hs-line bg-white p-5 shadow-[0_12px_30px_rgba(0,0,0,0.07)] sm:p-6 ${
+                f.chips ? "flex-col gap-5 sm:col-span-2 sm:flex-row sm:gap-8 lg:col-span-3" : f.shot ? "flex-col gap-5" : "gap-4"
               }`}
             >
               {f.shot ? (
-                <div className={f.chips ? "w-[30%] max-w-[200px] shrink-0 self-center" : "w-[34%] shrink-0 self-center"}>
-                  <PhoneShot shot={f.shot} sizes={f.chips ? "200px" : "(min-width: 1024px) 120px, 30vw"} />
+                <div className="mx-auto w-[46%] max-w-[200px] shrink-0 self-center sm:w-[60%]">
+                  <PhoneShot shot={f.shot} sizes="(min-width: 640px) 200px, 46vw" />
                 </div>
               ) : (
                 <div
@@ -374,11 +427,11 @@ export default function AppIntro({
                   {i + 1}
                 </div>
               )}
-              <div className="min-w-0 flex-1 self-center">
-                <h3 className="font-serif-jp text-xl font-black leading-snug text-hs-navy sm:text-2xl">
+              <div className={`min-w-0 flex-1 ${f.shot && !f.chips ? "text-center" : "self-center"}`}>
+                <h3 className="font-serif-jp text-2xl font-black leading-snug text-hs-navy">
                   {f.title}
                 </h3>
-                <p className="mt-2 font-sans-jp text-base leading-relaxed text-hs-ink sm:text-lg">
+                <p className="mt-2 font-sans-jp text-lg leading-relaxed text-hs-ink">
                   {f.outcome}
                 </p>
                 {f.chips && (
@@ -401,7 +454,7 @@ export default function AppIntro({
       </section>
 
       {/* ===== ⑤ 作った人 ===== */}
-      <section className="mx-auto w-full max-w-5xl px-5 py-16 sm:px-8 sm:py-24">
+      <section className="mx-auto w-full max-w-5xl px-5 py-12 sm:px-8 sm:py-16">
         <Kicker>{author.kicker}</Kicker>
         <H2 text={author.title} />
         <div className="mt-10 grid gap-8 md:grid-cols-[260px_1fr] md:gap-12">
@@ -422,7 +475,7 @@ export default function AppIntro({
             <p className="mt-1 font-sans-jp text-base text-hs-ink2">{author.nameSub}</p>
           </div>
           <div>
-            <ul className="grid gap-2.5 sm:grid-cols-2">
+            <ul className="grid gap-2.5">
               {author.facts.map((f) => (
                 <li
                   key={f}
@@ -474,7 +527,7 @@ export default function AppIntro({
       </section>
 
       {/* ===== ⑥ 2枚のカード（こどもモード・英語／使う人ごと） ===== */}
-      <section className="bg-white/70 py-16 sm:py-24">
+      <section className="bg-white/70 py-12 sm:py-16">
         <div className="mx-auto w-full max-w-5xl px-5 sm:px-8">
           <Kicker>{modes.kicker}</Kicker>
           <H2 text={modes.title} />
@@ -482,7 +535,7 @@ export default function AppIntro({
             {modes.cards.map((m, i) => (
               <article
                 key={i}
-                className="grid grid-cols-[1fr_38%] items-center gap-5 rounded-3xl border border-hs-line bg-white p-6 shadow-[0_12px_30px_rgba(0,0,0,0.07)] sm:p-7"
+                className="grid grid-cols-[1fr_30%] items-center gap-4 rounded-3xl border border-hs-line bg-white p-6 shadow-[0_12px_30px_rgba(0,0,0,0.07)] sm:p-7"
               >
                 <div>
                   <h3 className="font-serif-jp text-2xl font-black text-hs-navy sm:text-3xl">
@@ -508,7 +561,7 @@ export default function AppIntro({
       </section>
 
       {/* ===== ⑦ 値段と安心＋よくある質問＋もう一度買うボタン ===== */}
-      <section className="mx-auto w-full max-w-5xl px-5 py-16 sm:px-8 sm:py-24">
+      <section className="mx-auto w-full max-w-5xl px-5 py-12 sm:px-8 sm:py-16">
         <Kicker>{price.kicker}</Kicker>
         <H2 text={price.title} />
 
@@ -527,10 +580,10 @@ export default function AppIntro({
           <div className="mt-8 grid w-full gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {price.tiles.map((t) => (
               <div key={t.title} className="rounded-2xl bg-hs-cream px-4 py-4 text-left">
-                <p className="font-sans-jp text-lg font-black leading-snug text-hs-navy">
+                <p className="font-sans-jp text-xl font-black leading-snug text-hs-navy">
                   {t.title}
                 </p>
-                <p className="mt-1 font-sans-jp text-base leading-relaxed text-hs-ink2">
+                <p className="mt-1 font-sans-jp text-lg leading-relaxed text-hs-ink2">
                   {t.body}
                 </p>
               </div>

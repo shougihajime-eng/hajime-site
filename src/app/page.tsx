@@ -114,7 +114,7 @@ function FloatingKomaBg() {
 function SectionTitle({ ja, en }: { ja: string; en: string }) {
   return (
     <div className="reveal mb-14 flex flex-col items-center text-center">
-      <span className="text-[10px] tracking-[0.5em] text-kin/70 uppercase">
+      <span className="text-sm tracking-[0.5em] text-kin/70 uppercase">
         {en}
       </span>
       <h2 className="mt-3 font-serif-jp text-4xl font-black tracking-wider sm:text-5xl">
@@ -273,12 +273,10 @@ export default function Home() {
 
         <div className="relative mx-auto flex w-full max-w-5xl flex-col items-center px-6 pt-20 pb-24 sm:pt-28 sm:pb-32">
           {/* ローマ字 */}
-          <p className="mb-2 text-[10px] tracking-[0.6em] text-kin/70 uppercase sm:text-xs">
+          <p className="mb-2 text-sm tracking-[0.6em] text-kin/70 uppercase sm:text-sm">
             ✦  Suzuki Hajime  ✦
           </p>
-          <p className="mb-10 font-serif-jp text-xs tracking-[0.3em] text-kinari/50">
-            Professional Shogi Instructor
-          </p>
+          <div className="mb-8" />
 
           {/* 顔写真 */}
           <div className="hover-bob relative mb-10 h-52 w-52 sm:h-64 sm:w-64">
@@ -315,12 +313,18 @@ export default function Home() {
           </h1>
 
           {/* 肩書き */}
-          <div className="mt-8 flex flex-col items-center gap-2 font-serif-jp text-sm text-kinari/80 sm:text-base">
+          <div className="mt-8 flex flex-col items-center gap-3 text-center font-serif-jp text-lg text-kinari/90 sm:text-xl">
             <p className="tracking-widest">将棋講師 ／ 元奨励会三段</p>
-            <p className="flex items-center gap-3 text-kin">
-              <span className="text-xs">◆</span>
-              <span>全日本アマ名人 ・ 全国アマ王将</span>
-              <span className="text-xs">◆</span>
+            <p className="flex items-center gap-3 text-2xl font-bold text-kin sm:text-3xl">
+              <span className="text-base">◆</span>
+              <span><span className="inline-block">全日本アマ名人</span> ・ <span className="inline-block">全国アマ王将</span></span>
+              <span className="text-base">◆</span>
+            </p>
+            <p className="max-w-2xl text-base leading-relaxed text-kinari/80 sm:text-lg">
+              全日本アマ名人戦 ベスト4 ・ 神奈川王座 ・ 加古川青流戦 アマ代表3回 ・ 将棋の本4冊 ・ 漫画『リボーンの棋士』棋譜監修
+            </p>
+            <p className="mt-2 font-sans-jp text-lg font-bold text-kinari sm:text-xl">
+              横浜と東京（両国）で、子どもにも大人にも将棋を教えています。
             </p>
           </div>
 
@@ -331,7 +335,7 @@ export default function Home() {
               <br />
               <span className="text-kin-grad">楽しい。</span>
             </p>
-            <p className="mt-6 text-xs tracking-[0.3em] text-kinari/50 sm:text-sm">
+            <p className="mt-6 text-sm tracking-[0.3em] text-kinari/50 sm:text-sm">
               ── その一言を、もっと多くの人へ。
             </p>
           </div>
@@ -340,30 +344,41 @@ export default function Home() {
           <div className="mt-14 flex flex-wrap items-center justify-center gap-4">
             <a
               href="#services"
-              className="group relative overflow-hidden rounded-full border border-shu-deep/60 bg-shu px-9 py-4 font-sans-jp text-sm font-bold tracking-widest text-[#fff7ec] shadow-[0_10px_28px_rgba(199,73,43,0.35)] transition hover:bg-shu-deep"
+              className="group relative overflow-hidden rounded-full border border-shu-deep/60 bg-shu px-9 py-4 font-sans-jp text-base font-bold tracking-widest sm:text-lg text-[#fff7ec] shadow-[0_10px_28px_rgba(199,73,43,0.35)] transition hover:bg-shu-deep"
             >
-              <span className="relative z-10">道場へ進む ▶</span>
+              <span className="relative z-10">将棋教室を見る ▶</span>
             </a>
             <a
               href="https://www.youtube.com/channel/UCC0Q1NBgGJRzFFPe1IPYtwg"
               target="_blank"
               rel="noopener noreferrer"
-              className="group rounded-full border-2 border-kin/40 bg-card px-9 py-4 font-sans-jp text-sm font-bold tracking-widest text-kin shadow-[var(--sh)] transition hover:border-kin hover:bg-kin/10"
+              className="group rounded-full border-2 border-kin/40 bg-card px-9 py-4 font-sans-jp text-base font-bold tracking-widest sm:text-lg text-kin shadow-[var(--sh)] transition hover:border-kin hover:bg-kin/10"
             >
               動画を見る ▶
             </a>
             <a
               href="#apps"
-              className="group rounded-full border-2 border-kin/40 bg-card px-9 py-4 font-sans-jp text-sm font-bold tracking-widest text-kin shadow-[var(--sh)] transition hover:border-kin hover:bg-kin/10"
+              className="group rounded-full border-2 border-kin/40 bg-card px-9 py-4 font-sans-jp text-base font-bold tracking-widest sm:text-lg text-kin shadow-[var(--sh)] transition hover:border-kin hover:bg-kin/10"
             >
               アプリを見る ▶
             </a>
           </div>
 
-          {/* スクロール案内 */}
-          <div className="mt-20 flex flex-col items-center gap-2 text-kin/40">
-            <span className="text-[10px] tracking-[0.4em]">SCROLL</span>
-            <span className="h-8 w-px bg-gradient-to-b from-kin/60 to-transparent" />
+          {/* 海外の方へ（英語の自己紹介） */}
+          <div lang="en" className="mt-16 w-full max-w-2xl rounded-3xl border border-kin/30 bg-card px-6 py-6 text-left shadow-[var(--sh)] sm:px-8">
+            <p className="font-sans-jp text-base font-bold tracking-widest text-kin">In English</p>
+            <p className="mt-3 font-sans-jp text-lg leading-relaxed text-kinari">
+              Hajime Suzuki is a shogi (Japanese chess) teacher in Yokohama and Tokyo. He won Japan&apos;s two biggest
+              amateur titles, Amateur Meijin (2018) and Amateur Osho (2015), and reached 3-dan in the Shoreikai, the
+              professional training league. He wrote four shogi books and makes shogi apps, including one for beginners
+              in English.
+            </p>
+            <a
+              href="/hajimete-shogi/en"
+              className="mt-4 inline-flex min-h-11 items-center font-sans-jp text-lg font-bold text-kin underline underline-offset-4"
+            >
+              Learn shogi from zero: Hajime&apos;s First Shogi →
+            </a>
           </div>
         </div>
 
@@ -484,7 +499,7 @@ export default function Home() {
                 </a>
               ))}
             </div>
-            <p className="mt-2 text-center text-[10px] tracking-wider text-kinari/50">
+            <p className="mt-2 text-center text-sm tracking-wider text-kinari/50">
               数字はいずれも {AS_OF_JA}
             </p>
 
@@ -507,7 +522,7 @@ export default function Home() {
 
               {/* モットー */}
               <div className="mt-8 border-t border-rule-soft pt-6">
-                <p className="text-[10px] tracking-[0.4em] text-kin/70">
+                <p className="text-sm tracking-[0.4em] text-kin/70">
                   大事にしていること
                 </p>
                 <p className="mt-3 font-serif-jp text-2xl font-black tracking-wider sm:text-3xl">
@@ -549,7 +564,7 @@ export default function Home() {
                   className="spin-on-hover h-16 w-16 shrink-0 rounded-2xl shadow-[0_8px_20px_rgba(18,29,57,0.22)] sm:h-[72px] sm:w-[72px]"
                 />
                 <div>
-                  <span className="inline-block rounded-full bg-[#ed6749] px-3 py-0.5 font-sans-jp text-xs font-black tracking-wider text-white">
+                  <span className="inline-block rounded-full bg-[#ed6749] px-3 py-0.5 font-sans-jp text-sm font-black tracking-wider text-white">
                     {HAJIMETE_RELEASED ? "発売中" : "近日発売"}
                   </span>
                   <h3 className="mt-1 font-serif-jp text-2xl font-bold text-kinari sm:text-3xl">
@@ -592,7 +607,7 @@ export default function Home() {
                   className="spin-on-hover h-16 w-16 shrink-0 rounded-2xl shadow-[0_8px_20px_rgba(27,42,30,0.25)] sm:h-[72px] sm:w-[72px]"
                 />
                 <div>
-                  <span className="inline-block rounded-full bg-[#1b2a1e] px-3 py-0.5 font-sans-jp text-xs font-black tracking-wider text-[#f1e6c8]">
+                  <span className="inline-block rounded-full bg-[#1b2a1e] px-3 py-0.5 font-sans-jp text-sm font-black tracking-wider text-[#f1e6c8]">
                     発売中
                   </span>
                   <h3 className="mt-1 font-serif-jp text-2xl font-bold text-kinari sm:text-3xl">
@@ -601,13 +616,13 @@ export default function Home() {
                 </div>
               </div>
               <p className="mt-5 font-sans-jp text-base leading-relaxed text-kinari/85 sm:text-lg">
-                棋譜を、ためて。さがして、復習する。駒をならべると同じ形の自分の対局が見つかり、
+                教わった一手を、もう忘れない。駒をならべると同じ形の自分の対局が見つかり、
                 教わった一手は次の一手クイズになって戻ってくる、将棋講師が作った棋譜アプリ。
               </p>
               <p className="mt-3 text-sm leading-relaxed text-kinari/65">
-                買い切り1,000円・広告なし・完全オフライン・iPhone・iPad・Android
+                買い切り1,000円・広告なし・ネットがなくても動く・iPhone・iPad・Android
               </p>
-              <p className="mt-2 text-xs font-bold tracking-wider text-kin">
+              <p className="mt-2 text-sm font-bold tracking-wider text-kin">
                 {NUMBERS.kifuVaultRating.ja}
               </p>
               <LiteYouTube
@@ -667,7 +682,7 @@ export default function Home() {
                 style={{ animationDelay: `${i * 60}ms` }}
               >
                 {a.highlight && (
-                  <span className="absolute -top-2 -right-2 rounded-full bg-shu px-3 py-0.5 font-sans-jp text-[10px] font-bold tracking-widest text-[#fff7ec] shadow-lg">
+                  <span className="absolute -top-2 -right-2 rounded-full bg-shu px-3 py-0.5 font-sans-jp text-sm font-bold tracking-widest text-[#fff7ec] shadow-lg">
                     TITLE
                   </span>
                 )}
@@ -695,7 +710,7 @@ export default function Home() {
             ))}
           </div>
 
-          <p className="reveal mt-8 text-center text-xs text-kinari/40">
+          <p className="reveal mt-8 text-center text-sm text-kinari/40">
             ※ 出典：日本将棋連盟 公式ページ／本人確認済み
           </p>
         </div>
@@ -734,7 +749,7 @@ export default function Home() {
                       <h3 className="font-serif-jp text-sm font-bold leading-tight text-[#463527] sm:text-base">
                         {s.name}
                       </h3>
-                      <p className="text-[10px] tracking-widest text-[#463527]/70">
+                      <p className="text-sm tracking-widest text-[#463527]/70">
                         {s.place}
                       </p>
                     </div>
@@ -793,7 +808,7 @@ export default function Home() {
                   <span className="flex h-9 w-12 items-center justify-center rounded-xl bg-shu font-bold text-[#fff7ec] shadow-[0_4px_12px_rgba(199,73,43,0.35)]">
                     ▶
                   </span>
-                  <span className="text-[10px] tracking-[0.4em] text-kin/70">
+                  <span className="text-sm tracking-[0.4em] text-kin/70">
                     YOUTUBE CHANNEL
                   </span>
                 </div>
@@ -808,7 +823,7 @@ export default function Home() {
                 <p className="mt-5 font-serif-jp text-3xl font-black text-kin-grad sm:text-4xl">
                   登録者 {NUMBERS.taichiCh.subsJa}
                 </p>
-                <p className="text-[10px] tracking-wider text-kinari/50">{AS_OF_JA}</p>
+                <p className="text-sm tracking-wider text-kinari/50">{AS_OF_JA}</p>
               </div>
               <div className="relative mt-6 flex items-center justify-between">
                 <span className="font-serif-jp text-lg text-kin transition group-hover:text-kin-bright">
@@ -832,7 +847,7 @@ export default function Home() {
                   <span className="flex h-9 w-12 items-center justify-center rounded-xl bg-shu font-bold text-[#fff7ec] shadow-[0_4px_12px_rgba(199,73,43,0.35)]">
                     ▶
                   </span>
-                  <span className="text-[10px] tracking-[0.4em] text-kin/70">
+                  <span className="text-sm tracking-[0.4em] text-kin/70">
                     YOUTUBE CHANNEL
                   </span>
                 </div>
@@ -847,7 +862,7 @@ export default function Home() {
                 <p className="mt-5 font-serif-jp text-3xl font-black text-kin-grad sm:text-4xl">
                   登録者 {NUMBERS.labCh.subsJa}
                 </p>
-                <p className="text-[10px] tracking-wider text-kinari/50">{AS_OF_JA}</p>
+                <p className="text-sm tracking-wider text-kinari/50">{AS_OF_JA}</p>
               </div>
               <div className="relative mt-6 flex items-center justify-between">
                 <span className="font-serif-jp text-lg text-kin transition group-hover:text-kin-bright">
@@ -870,7 +885,7 @@ export default function Home() {
                   <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-kinari/40 bg-yoru-deep/50 font-serif-jp font-bold text-kinari">
                     𝕏
                   </span>
-                  <span className="text-[10px] tracking-[0.4em] text-kin/70">
+                  <span className="text-sm tracking-[0.4em] text-kin/70">
                     X (TWITTER)
                   </span>
                 </div>
@@ -883,7 +898,7 @@ export default function Home() {
                 <p className="mt-4 font-serif-jp text-2xl font-black text-kin-grad sm:text-3xl">
                   フォロワー {NUMBERS.x.followersJa}
                 </p>
-                <p className="text-[10px] tracking-wider text-kinari/50">{AS_OF_JA}</p>
+                <p className="text-sm tracking-wider text-kinari/50">{AS_OF_JA}</p>
               </div>
               <span className="mt-6 font-serif-jp text-sm text-kin transition group-hover:text-kin-bright">
                 フォローする →
@@ -901,7 +916,7 @@ export default function Home() {
                   <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-kinari/40 bg-gradient-to-br from-[#f9ce34]/40 via-[#ee2a7b]/40 to-[#6228d7]/40 font-serif-jp text-sm font-bold text-kinari">
                     IG
                   </span>
-                  <span className="text-[10px] tracking-[0.4em] text-kin/70">
+                  <span className="text-sm tracking-[0.4em] text-kin/70">
                     INSTAGRAM
                   </span>
                 </div>
@@ -972,11 +987,11 @@ export default function Home() {
                 >
                   {b.title}
                 </a>
-                <span className="shrink-0 text-xs text-kin/70">{b.role}</span>
+                <span className="shrink-0 text-sm text-kin/70">{b.role}</span>
               </li>
             ))}
           </ul>
-          <p className="reveal mt-4 text-center text-xs text-kinari/50">
+          <p className="reveal mt-4 text-center text-sm text-kinari/50">
             本の題名を押すと売り場（マイナビ出版の公式ページ／漫画は Amazon.co.jp）へ飛びます。
           </p>
         </div>
@@ -1004,14 +1019,14 @@ export default function Home() {
               href="https://x.com/hajjme99"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border border-shu-deep/60 bg-shu px-9 py-4 font-sans-jp text-sm font-bold tracking-widest text-[#fff7ec] shadow-[0_10px_28px_rgba(199,73,43,0.35)] transition hover:bg-shu-deep"
+              className="rounded-full border border-shu-deep/60 bg-shu px-9 py-4 font-sans-jp text-base font-bold tracking-widest sm:text-lg text-[#fff7ec] shadow-[0_10px_28px_rgba(199,73,43,0.35)] transition hover:bg-shu-deep"
             >
               𝕏 でDMする
             </a>
             <Link
               href="https://hajime-shogi.vercel.app"
               target="_blank"
-              className="rounded-full border-2 border-kin/40 bg-card px-9 py-4 font-sans-jp text-sm font-bold tracking-widest text-kin shadow-[var(--sh)] transition hover:border-kin hover:bg-kin/10"
+              className="rounded-full border-2 border-kin/40 bg-card px-9 py-4 font-sans-jp text-base font-bold tracking-widest sm:text-lg text-kin shadow-[var(--sh)] transition hover:border-kin hover:bg-kin/10"
             >
               教室サイトへ ▶
             </Link>
@@ -1040,10 +1055,10 @@ export default function Home() {
           <p className="font-serif-jp text-base tracking-[0.5em] text-kin-bright">
             鈴木 肇
           </p>
-          <p className="mt-2 text-[10px] tracking-[0.3em] text-[#f6e8c6]/60">
+          <p className="mt-2 text-sm tracking-[0.3em] text-[#f6e8c6]/60">
             SUZUKI HAJIME · OFFICIAL SITE
           </p>
-          <p className="mt-4 text-xs text-[#f6e8c6]/50">
+          <p className="mt-4 text-sm text-[#f6e8c6]/50">
             © {new Date().getFullYear()} Suzuki Hajime. All rights reserved.
           </p>
         </div>

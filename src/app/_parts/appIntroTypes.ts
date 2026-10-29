@@ -25,7 +25,17 @@ export type AppCopy = {
     priceLine: string;
     platformLine: string;
     /** 発売前（RELEASED=false）の表示 */
-    comingSoon: { badge: string; appStore: string; googlePlay: string; note: string };
+    comingSoon: {
+      badge: string;
+      appStore: string;
+      googlePlay: string;
+      note: string;
+      /** 発売前に出すボタン（発売のお知らせを受けとる先＝X） */
+      followLabel?: string;
+      followHref?: string;
+    };
+    /** ページの途中に出す買うボタンの上の1行 */
+    midCall?: string;
   };
   /** ストアの評価（発売ずみのアプリだけ。日付つき） */
   rating?: string;
@@ -43,7 +53,16 @@ export type AppCopy = {
     sign: string;
     signSub: string;
   };
-  worries: {
+  /** 使っている様子の動画（YouTube）。無ければ出さない */
+  video?: { kicker: string; title: string; videoId: string; caption: string };
+  /** 買った人の声（App Store のレビューの原文のまま・省いた所は…）。無ければ出さない */
+  reviews?: {
+    kicker: string;
+    title: string;
+    note: string;
+    items: { title: string; text: string; by: string; stars: number }[];
+  };
+  worries?: {
     kicker: string;
     title: string;
     items: { worry: string; answer: string; body: string }[];
