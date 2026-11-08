@@ -3,6 +3,7 @@ import Link from "next/link";
 import LiteYouTube from "./_parts/LiteYouTube";
 import { HAJIMETE_RELEASED } from "./_parts/release";
 import { AS_OF_JA, NUMBERS } from "./_parts/numbers";
+import portrait from "../../public/hajime-portrait-genki.webp";
 
 /* ============================================
    将棋駒（金色グラデ）
@@ -74,37 +75,6 @@ function Koma({
         {label}
       </text>
     </svg>
-  );
-}
-
-/* ============================================
-   背景で舞う駒たち
-   ============================================ */
-function FloatingKomaBg() {
-  return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute inset-0 overflow-hidden"
-    >
-      <div className="koma-float-1 absolute left-[5%] top-[8%] w-16 opacity-[0.08] sm:w-24">
-        <Koma label="飛" variant="gold" />
-      </div>
-      <div className="koma-float-2 absolute right-[8%] top-[14%] w-14 opacity-[0.07] sm:w-20">
-        <Koma label="角" variant="gold" />
-      </div>
-      <div className="koma-float-3 absolute left-[12%] bottom-[18%] w-12 opacity-[0.06] sm:w-16">
-        <Koma label="桂" variant="gold" />
-      </div>
-      <div className="koma-float-4 absolute right-[14%] bottom-[10%] w-14 opacity-[0.07] sm:w-20">
-        <Koma label="銀" variant="gold" />
-      </div>
-      <div className="koma-float-2 absolute left-[40%] top-[40%] hidden w-10 opacity-[0.05] sm:block">
-        <Koma label="歩" variant="gold" />
-      </div>
-      <div className="koma-float-1 absolute right-[35%] bottom-[35%] hidden w-12 opacity-[0.05] sm:block">
-        <Koma label="香" variant="gold" />
-      </div>
-    </div>
   );
 }
 
@@ -263,109 +233,99 @@ export default function Home() {
           HERO
           =================================================== */}
       <section className="relative overflow-hidden">
-        <FloatingKomaBg />
-
-        {/* 上部の金グラデ光 */}
+        {/* 上部の金の線 */}
         <div
           aria-hidden
           className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-kin to-transparent"
         />
 
-        <div className="relative mx-auto flex w-full max-w-5xl flex-col items-center px-6 pt-20 pb-24 sm:pt-28 sm:pb-32">
-          {/* ローマ字 */}
-          <p className="mb-2 text-sm tracking-[0.6em] text-kin/70 uppercase sm:text-sm">
-            ✦  Suzuki Hajime  ✦
-          </p>
-          <div className="mb-8" />
+        <div className="relative mx-auto w-full max-w-5xl px-6 pt-14 pb-20 sm:pt-20 sm:pb-24 md:pt-24 md:pb-28">
+          <div className="grid items-center gap-10 md:grid-cols-[300px_minmax(0,1fr)] md:gap-14 lg:grid-cols-[340px_minmax(0,1fr)] lg:gap-20">
+            {/* 顔写真（和装・3:4 の写真カード） */}
+            <figure className="hero-in mx-auto w-56 sm:w-64 md:w-full">
+              <div className="relative aspect-[3/4] overflow-hidden rounded-[2rem] bg-[#f3dfc4] shadow-[var(--sh-l)] ring-1 ring-kin/40">
+                <Image
+                  src={portrait}
+                  alt="鈴木 肇"
+                  fill
+                  preload
+                  placeholder="blur"
+                  sizes="(min-width: 1024px) 340px, (min-width: 768px) 300px, (min-width: 640px) 16rem, 14rem"
+                  className="object-cover"
+                />
+              </div>
+            </figure>
 
-          {/* 顔写真 */}
-          <div className="hover-bob relative mb-10 h-52 w-52 sm:h-64 sm:w-64">
-            <div className="pulse-kin absolute inset-0 rounded-full" />
-            <div className="absolute inset-0 overflow-hidden rounded-full ring-2 ring-kin/80">
-              <Image
-                src="/hajime-portrait.png"
-                alt="鈴木 肇"
-                fill
-                preload
-                sizes="(min-width: 640px) 16rem, 13rem"
-                className="object-cover object-top"
-              />
-            </div>
-            {/* 王の駒（右下） */}
-            <div className="koma-float-1 absolute -bottom-3 -right-3 w-16 drop-shadow-[0_6px_14px_rgba(150,90,40,0.35)] sm:w-20">
-              <Koma label="王" variant="gold" />
-            </div>
-            {/* 朱の駒（左上） */}
-            <div className="koma-float-2 absolute -left-4 -top-2 w-12 drop-shadow-[0_6px_14px_rgba(199,73,43,0.4)] sm:w-14">
-              <Koma label="名" variant="shu" />
-            </div>
-          </div>
+            {/* 名前・肩書き・実績 */}
+            <div className="hero-in hero-in-2 text-center md:text-left">
+              <p className="text-sm tracking-[0.5em] text-kin/70 uppercase">
+                Suzuki Hajime
+              </p>
+              <h1 className="mt-3 font-serif-jp text-6xl font-bold tracking-[0.12em] text-kinari sm:text-7xl lg:text-8xl">
+                <span className="relative inline-block">
+                  鈴木 肇
+                  <span
+                    aria-hidden
+                    className="rakkan absolute -right-9 top-1 h-8 w-8 text-base sm:-right-11 sm:top-2 sm:h-10 sm:w-10 sm:text-xl"
+                  >
+                    肇
+                  </span>
+                </span>
+              </h1>
 
-          {/* 名前＋朱の落款（signature） */}
-          <h1 className="relative font-serif-jp text-7xl font-bold tracking-[0.15em] text-kinari sm:text-8xl md:text-9xl">
-            鈴木 肇
-            <span
-              aria-hidden
-              className="rakkan absolute -right-9 top-1 h-9 w-9 text-lg sm:-right-14 sm:top-2 sm:h-12 sm:w-12 sm:text-2xl"
-            >
-              肇
-            </span>
-          </h1>
+              <div className="mt-6 flex flex-col items-center gap-3 font-serif-jp text-lg text-kinari/90 sm:text-xl md:items-start">
+                <p className="tracking-widest">将棋講師 ／ 元奨励会三段</p>
+                <p className="text-2xl font-bold text-kin sm:text-3xl">
+                  <span className="inline-block">全日本アマ名人</span> ・ <span className="inline-block">全国アマ王将</span>
+                </p>
+                <span aria-hidden className="my-1 h-px w-16 bg-kin/50" />
+                <p className="max-w-2xl text-base leading-relaxed text-kinari/80 sm:text-lg">
+                  全日本アマ名人戦 ベスト4 ・ 神奈川王座 ・ 加古川青流戦 アマ代表3回 ・ 将棋の本4冊 ・ 漫画『リボーンの棋士』棋譜監修
+                </p>
+                <p className="mt-1 font-sans-jp text-lg font-bold text-kinari sm:text-xl">
+                  横浜と東京（両国）で、子どもにも大人にも将棋を教えています。
+                </p>
+              </div>
 
-          {/* 肩書き */}
-          <div className="mt-8 flex flex-col items-center gap-3 text-center font-serif-jp text-lg text-kinari/90 sm:text-xl">
-            <p className="tracking-widest">将棋講師 ／ 元奨励会三段</p>
-            <p className="flex items-center gap-3 text-2xl font-bold text-kin sm:text-3xl">
-              <span className="text-base">◆</span>
-              <span><span className="inline-block">全日本アマ名人</span> ・ <span className="inline-block">全国アマ王将</span></span>
-              <span className="text-base">◆</span>
-            </p>
-            <p className="max-w-2xl text-base leading-relaxed text-kinari/80 sm:text-lg">
-              全日本アマ名人戦 ベスト4 ・ 神奈川王座 ・ 加古川青流戦 アマ代表3回 ・ 将棋の本4冊 ・ 漫画『リボーンの棋士』棋譜監修
-            </p>
-            <p className="mt-2 font-sans-jp text-lg font-bold text-kinari sm:text-xl">
-              横浜と東京（両国）で、子どもにも大人にも将棋を教えています。
-            </p>
+              {/* CTA */}
+              <div className="mt-9 flex flex-wrap items-center justify-center gap-4 md:justify-start">
+                <a
+                  href="#services"
+                  className="rounded-full border border-shu-deep/60 bg-shu px-7 py-4 font-sans-jp text-base font-bold tracking-widest sm:text-lg text-[#fff7ec] shadow-[0_10px_28px_rgba(199,73,43,0.35)] transition hover:bg-shu-deep"
+                >
+                  将棋教室を見る ▶
+                </a>
+                <a
+                  href="https://www.youtube.com/channel/UCC0Q1NBgGJRzFFPe1IPYtwg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full border-2 border-kin/40 bg-card px-7 py-4 font-sans-jp text-base font-bold tracking-widest sm:text-lg text-kin shadow-[var(--sh)] transition hover:border-kin hover:bg-kin/10"
+                >
+                  動画を見る ▶
+                </a>
+                <a
+                  href="#apps"
+                  className="rounded-full border-2 border-kin/40 bg-card px-7 py-4 font-sans-jp text-base font-bold tracking-widest sm:text-lg text-kin shadow-[var(--sh)] transition hover:border-kin hover:bg-kin/10"
+                >
+                  アプリを見る ▶
+                </a>
+              </div>
+            </div>
           </div>
 
           {/* キャッチコピー */}
-          <div className="mt-14 text-center">
+          <div className="hero-in hero-in-3 mt-20 text-center sm:mt-24">
             <p className="font-serif-jp text-3xl font-bold leading-relaxed tracking-wider text-kinari sm:text-4xl md:text-5xl">
               <span className="brush-underline">将棋って、</span>
-              <br />
               <span className="text-kin-grad">楽しい。</span>
             </p>
-            <p className="mt-6 text-sm tracking-[0.3em] text-kinari/50 sm:text-sm">
+            <p className="mt-5 text-sm tracking-[0.3em] text-kinari/50">
               ── その一言を、もっと多くの人へ。
             </p>
           </div>
 
-          {/* CTA */}
-          <div className="mt-14 flex flex-wrap items-center justify-center gap-4">
-            <a
-              href="#services"
-              className="group relative overflow-hidden rounded-full border border-shu-deep/60 bg-shu px-9 py-4 font-sans-jp text-base font-bold tracking-widest sm:text-lg text-[#fff7ec] shadow-[0_10px_28px_rgba(199,73,43,0.35)] transition hover:bg-shu-deep"
-            >
-              <span className="relative z-10">将棋教室を見る ▶</span>
-            </a>
-            <a
-              href="https://www.youtube.com/channel/UCC0Q1NBgGJRzFFPe1IPYtwg"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group rounded-full border-2 border-kin/40 bg-card px-9 py-4 font-sans-jp text-base font-bold tracking-widest sm:text-lg text-kin shadow-[var(--sh)] transition hover:border-kin hover:bg-kin/10"
-            >
-              動画を見る ▶
-            </a>
-            <a
-              href="#apps"
-              className="group rounded-full border-2 border-kin/40 bg-card px-9 py-4 font-sans-jp text-base font-bold tracking-widest sm:text-lg text-kin shadow-[var(--sh)] transition hover:border-kin hover:bg-kin/10"
-            >
-              アプリを見る ▶
-            </a>
-          </div>
-
           {/* 海外の方へ（英語の自己紹介） */}
-          <div lang="en" className="mt-16 w-full max-w-2xl rounded-3xl border border-kin/30 bg-card px-6 py-6 text-left shadow-[var(--sh)] sm:px-8">
+          <div lang="en" className="hero-in hero-in-3 mx-auto mt-14 w-full max-w-2xl rounded-3xl border border-kin/30 bg-card px-6 py-6 text-left shadow-[var(--sh)] sm:px-8">
             <p className="font-sans-jp text-base font-bold tracking-widest text-kin">In English</p>
             <p className="mt-3 font-sans-jp text-lg leading-relaxed text-kinari">
               Hajime Suzuki is a shogi (Japanese chess) teacher in Yokohama and Tokyo. He won Japan&apos;s two biggest
@@ -397,7 +357,7 @@ export default function Home() {
       >
         <div className="relative mx-auto flex w-full max-w-5xl flex-col items-center gap-6 px-6 md:flex-row md:justify-between">
           <div className="flex items-start gap-4 sm:items-center">
-            <div className="koma-hop w-10 shrink-0 sm:w-12" aria-hidden>
+            <div className="w-10 shrink-0 sm:w-12" aria-hidden>
               <Koma label="歩" variant="gold" />
             </div>
             <Image
@@ -405,7 +365,7 @@ export default function Home() {
               alt=""
               width={72}
               height={72}
-              className="spin-on-hover h-16 w-16 shrink-0 rounded-2xl shadow-[0_8px_20px_rgba(0,0,0,0.35)] sm:h-[72px] sm:w-[72px]"
+              className="h-16 w-16 shrink-0 rounded-2xl shadow-[0_8px_20px_rgba(0,0,0,0.35)] sm:h-[72px] sm:w-[72px]"
             />
             <div>
               <span className="inline-block rounded-full bg-[#ed6749] px-3 py-1 font-sans-jp text-sm font-black tracking-wider text-white">
@@ -561,7 +521,7 @@ export default function Home() {
                   alt=""
                   width={72}
                   height={72}
-                  className="spin-on-hover h-16 w-16 shrink-0 rounded-2xl shadow-[0_8px_20px_rgba(18,29,57,0.22)] sm:h-[72px] sm:w-[72px]"
+                  className="h-16 w-16 shrink-0 rounded-2xl shadow-[0_8px_20px_rgba(18,29,57,0.22)] sm:h-[72px] sm:w-[72px]"
                 />
                 <div>
                   <span className="inline-block rounded-full bg-[#ed6749] px-3 py-0.5 font-sans-jp text-sm font-black tracking-wider text-white">
@@ -604,7 +564,7 @@ export default function Home() {
                   alt=""
                   width={72}
                   height={72}
-                  className="spin-on-hover h-16 w-16 shrink-0 rounded-2xl shadow-[0_8px_20px_rgba(27,42,30,0.25)] sm:h-[72px] sm:w-[72px]"
+                  className="h-16 w-16 shrink-0 rounded-2xl shadow-[0_8px_20px_rgba(27,42,30,0.25)] sm:h-[72px] sm:w-[72px]"
                 />
                 <div>
                   <span className="inline-block rounded-full bg-[#1b2a1e] px-3 py-0.5 font-sans-jp text-sm font-black tracking-wider text-[#f1e6c8]">
@@ -666,7 +626,6 @@ export default function Home() {
         id="achievements"
         className="relative border-y border-rule-soft bg-yoru-deep/70 py-24 sm:py-32"
       >
-        <FloatingKomaBg />
         <div className="relative mx-auto w-full max-w-4xl px-6">
           <SectionTitle ja="戦歴・受賞" en="Achievements" />
 
@@ -674,7 +633,7 @@ export default function Home() {
             {achievements.map((a, i) => (
               <article
                 key={i}
-                className={`reveal-rotate group relative flex flex-col gap-3 rounded-3xl border p-6 transition hover:-translate-y-1 ${
+                className={`reveal group relative flex flex-col gap-3 rounded-3xl border p-6 transition hover:-translate-y-1 ${
                   a.highlight
                     ? "border-kin-bright/50 bg-gradient-to-br from-[#fff7e0] to-[#f6e8c6] glow-kin-strong"
                     : "border-rule-soft bg-card shadow-[var(--sh)] hover:border-kin/40"
@@ -727,7 +686,7 @@ export default function Home() {
             {services.map((s, i) => (
               <div
                 key={s.name}
-                className="reveal-rotate group flex flex-col"
+                className="reveal group flex flex-col"
                 style={{ animationDelay: `${i * 100}ms` }}
               >
                 <a
@@ -951,7 +910,7 @@ export default function Home() {
                   href={b.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="reveal-rotate group flex h-64 w-12 flex-col justify-between rounded-t-md border border-shu-deep/40 bg-gradient-to-b from-shu-bright via-shu to-shu-deep px-2 py-4 shadow-[0_10px_24px_rgba(199,73,43,0.3)] transition hover:-translate-y-3 hover:from-kin-bright hover:via-[#c78a1f] hover:to-kin sm:h-72 sm:w-14"
+                  className="reveal group flex h-64 w-12 flex-col justify-between rounded-t-md border border-shu-deep/40 bg-gradient-to-b from-shu-bright via-shu to-shu-deep px-2 py-4 shadow-[0_10px_24px_rgba(199,73,43,0.3)] transition hover:-translate-y-3 hover:from-kin-bright hover:via-[#c78a1f] hover:to-kin sm:h-72 sm:w-14"
                   style={{ animationDelay: `${i * 80}ms` }}
                   title={`${b.title}（${b.year} / ${b.role}）── 売り場へ`}
                   aria-label={`${b.title}の売り場へ`}
@@ -1004,7 +963,6 @@ export default function Home() {
         id="contact"
         className="relative border-t border-rule-soft bg-yoru-deep py-24 sm:py-32"
       >
-        <FloatingKomaBg />
         <div className="relative mx-auto flex w-full max-w-2xl flex-col items-center px-6 text-center">
           <SectionTitle ja="ご連絡" en="Contact" />
 
@@ -1019,7 +977,7 @@ export default function Home() {
               href="https://x.com/hajjme99"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border border-shu-deep/60 bg-shu px-9 py-4 font-sans-jp text-base font-bold tracking-widest sm:text-lg text-[#fff7ec] shadow-[0_10px_28px_rgba(199,73,43,0.35)] transition hover:bg-shu-deep"
+              className="rounded-full border-2 border-kin/40 bg-card px-9 py-4 font-sans-jp text-base font-bold tracking-widest sm:text-lg text-kin shadow-[var(--sh)] transition hover:border-kin hover:bg-kin/10"
             >
               𝕏 でDMする
             </a>

@@ -202,13 +202,13 @@ export default function AppIntro({
                 width={72}
                 height={72}
                 loading="eager"
-                className="spin-on-hover h-16 w-16 rounded-2xl shadow-[0_8px_20px_rgba(0,0,0,0.2)] sm:h-[72px] sm:w-[72px]"
+                className="h-16 w-16 rounded-2xl shadow-[0_8px_20px_rgba(0,0,0,0.2)] sm:h-[72px] sm:w-[72px]"
               />
               <p className="font-serif-jp text-2xl font-bold tracking-wide text-hs-navy sm:text-3xl">
                 {hero.appName}
               </p>
               {!released && (
-                <span className="koma-hop rounded-full bg-hs-coral px-4 py-1.5 font-sans-jp text-base font-black tracking-wider text-white">
+                <span className="rounded-full bg-hs-coral px-4 py-1.5 font-sans-jp text-base font-black tracking-wider text-white">
                   {copy.store.comingSoon.badge}
                 </span>
               )}
@@ -250,7 +250,7 @@ export default function AppIntro({
         <div className="mx-auto grid w-full max-w-5xl items-center gap-8 px-5 sm:px-8 md:grid-cols-[auto_1fr] md:gap-12">
           <div className="mx-auto h-40 w-40 shrink-0 overflow-hidden rounded-full ring-4 ring-hs-coral sm:h-52 sm:w-52">
             <Image
-              src="/hajime-portrait.png"
+              src="/hajime-portrait-genki.webp"
               alt={author.name}
               width={208}
               height={208}
@@ -461,7 +461,7 @@ export default function AppIntro({
           <div className="flex flex-col items-center md:items-start">
             <div className="h-48 w-48 overflow-hidden rounded-[2rem] ring-4 ring-hs-peach sm:h-60 sm:w-60">
               <Image
-                src="/hajime-portrait.png"
+                src="/hajime-portrait-genki.webp"
                 alt={author.name}
                 width={240}
                 height={240}

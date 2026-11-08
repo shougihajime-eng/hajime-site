@@ -4,4 +4,4 @@
    → 紹介ページ（日本語・英語）の買うボタンが本物のストアのボタンに変わり、
      トップページの「近日発売」の帯が「発売中」に変わる。
    ============================================ */
-export const HAJIMETE_RELEASED = false;
+export const HAJIMETE_RELEASED = true;
